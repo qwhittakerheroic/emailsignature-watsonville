@@ -60,6 +60,17 @@ input[type="url"] {
     border-radius: 5px;
     font-size: 1rem;
     transition: border-color 0.3s ease;
+    background-color: #f8f9fa;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="tel"]:focus,
+input[type="url"]:focus {
+    outline: none;
+    border-color: #BA0101;
+    background-color: #ffffff;
+    box-shadow: 0 0 0 2px rgba(186, 1, 1, 0.1);
 }
 
 input[type="file"] {
@@ -75,6 +86,7 @@ input[type="checkbox"] {
     height: 16px;
     margin-right: 8px;
     cursor: pointer;
+    accent-color: #BA0101;
 }
 
 .esg-checkbox-group {
@@ -90,7 +102,7 @@ input[type="checkbox"] {
 }
 
 .esg-button-options {
-    background: #f8f9fa;
+    background: #ffffff;
     padding: 15px;
     border-radius: 5px;
     border: 1px solid #ddd;
@@ -100,11 +112,6 @@ input[type="checkbox"] {
     display: flex;
     flex-direction: column;
     gap: 10px;
-}
-
-input:focus {
-    outline: none;
-    border-color: #3498db;
 }
 
 .image-preview {
@@ -393,4 +400,69 @@ input:focus {
 .esg-color-input input[type="color"]::-webkit-color-swatch {
     border: none;
     border-radius: 3px;
+}
+
+/* Password Protection Styles */
+.password-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.password-modal {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 10px;
+    text-align: center;
+    max-width: 400px;
+    width: 90%;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.password-modal h2 {
+    color: #BA0101;
+    margin-bottom: 1rem;
+}
+
+.password-modal p {
+    margin-bottom: 1.5rem;
+    color: #666;
+}
+
+.password-modal input[type="password"] {
+    width: 100%;
+    padding: 0.8rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    background-color: #f8f9fa;
+}
+
+.password-submit {
+    background-color: #BA0101;
+    color: white;
+    border: none;
+    padding: 0.8rem 2rem;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.password-submit:hover {
+    background-color: #9a0000;
+}
+
+.password-error {
+    color: #BA0101;
+    margin-top: 1rem;
+    font-size: 0.9rem;
 } 
