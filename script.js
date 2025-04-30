@@ -163,10 +163,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const instagram = document.getElementById('instagram').value;
         // No checkboxes, just use the values if present
         let socialMediaHTML = '';
-        if (linkedin) socialMediaHTML += `<a href="${linkedin}" style="margin-right: 10px;"><img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" alt="LinkedIn" width="24" height="24" style="border: 0; display: inline-block;"></a>`;
-        if (twitter) socialMediaHTML += `<a href="${twitter}" style="margin-right: 10px;"><img src="https://cdn-icons-png.flaticon.com/512/733/733579.png" alt="Twitter" width="24" height="24" style="border: 0; display: inline-block;"></a>`;
-        if (facebook) socialMediaHTML += `<a href="${facebook}" style="margin-right: 10px;"><img src="https://cdn-icons-png.flaticon.com/512/124/124010.png" alt="Facebook" width="24" height="24" style="border: 0; display: inline-block;"></a>`;
-        if (instagram) socialMediaHTML += `<a href="${instagram}"><img src="https://cdn-icons-png.flaticon.com/512/174/174855.png" alt="Instagram" width="24" height="24" style="border: 0; display: inline-block;"></a>`;
+        if (linkedin) socialMediaHTML += `<a href="${linkedin}" style="margin-right: 10px;"><img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" alt="LinkedIn" width="24" height="24" style="border: 0; display: inline-block; filter: grayscale(100%) brightness(0);"></a>`;
+        if (twitter) socialMediaHTML += `<a href="${twitter}" style="margin-right: 10px;"><img src="https://cdn-icons-png.flaticon.com/512/733/733579.png" alt="Twitter" width="24" height="24" style="border: 0; display: inline-block; filter: grayscale(100%) brightness(0);"></a>`;
+        if (facebook) socialMediaHTML += `<a href="${facebook}" style="margin-right: 10px;"><img src="https://cdn-icons-png.flaticon.com/512/124/124010.png" alt="Facebook" width="24" height="24" style="border: 0; display: inline-block; filter: grayscale(100%) brightness(0);"></a>`;
+        if (instagram) socialMediaHTML += `<a href="${instagram}"><img src="https://cdn-icons-png.flaticon.com/512/174/174855.png" alt="Instagram" width="24" height="24" style="border: 0; display: inline-block; filter: grayscale(100%) brightness(0);"></a>`;
 
         // Custom button options
         const showButton = document.getElementById('show-button').checked;
@@ -175,6 +175,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Get image URLs
         const profilePictureUrl = profilePictureUrlInput.value.trim() || 'https://heroic.com/wp-content/uploads/placeholder-person.jpg';
+        const showProfileImage = document.getElementById('show-profile-image').checked;
         // Gather all company logo URLs
         const logoInputs = companyLogoGroup.querySelectorAll('.company-logo-url');
         const companyLogoUrls = Array.from(logoInputs).map(input => input.value.trim()).filter(Boolean);
@@ -197,16 +198,16 @@ document.addEventListener('DOMContentLoaded', () => {
             <table cellspacing="0" border="0" style="font-family: Tahoma, Arial, Helvetica, sans-serif; font-size: 13px; border-collapse: collapse; mso-table-lspace: 0; mso-table-rspace: 0; box-shadow: 0 2px 12px ${accentColor}10, 0 6px 20px rgba(0,0,0,0.03); border-radius: 16px; margin: 10px; background: #fafbfc;">
                 <tr>
                     <td style="width: 6px; background: ${accentColor}; border-radius: 16px 0 0 16px;" rowspan="3"></td>
-                    <td width="120" style="width: 120px; padding-right: 18px; vertical-align: center; padding-left: 10px;" valign="center">
+                    <td width="${showProfileImage ? '120' : '0'}" style="width: ${showProfileImage ? '120px' : '0px'}; padding-right: ${showProfileImage ? '18px' : '0px'}; vertical-align: center; padding-left: ${showProfileImage ? '10px' : '0px'};" valign="center">
                         <table cellpadding="0" cellspacing="0" border="0">
                             <tr>
                                 <td style="line-height: 0px; padding-bottom: 0px;">
-                                    ${profilePictureUrl ? `<img class="signature-image" border="0" style="border: 0px; border-radius: 50%; width: 110px; height: 110px; display: block;" width="110" height="110" src="${profilePictureUrl}" alt="Profile Picture" onerror="this.style.display='none'">` : ''}
+                                    ${showProfileImage && profilePictureUrl ? `<img class="signature-image" border="0" style="border: 0px; border-radius: 50%; width: 110px; height: 110px; display: block;" width="110" height="110" src="${profilePictureUrl}" alt="Profile Picture" onerror="this.style.display='none'">` : ''}
                                 </td>
                             </tr>
                         </table>
                     </td>
-                    <td width="500" style="width: 500px; padding-left: 18px; padding-top: 10px; vertical-align: top; mso-line-height-rule: exactly; line-height: 20px; border-left: 1px solid #f0f0f0; background: #fff; border-radius: 0 16px 0 0;" valign="top">
+                    <td width="500" style="width: 500px; padding-left: 18px; padding-top: 10px; padding-bottom: 20px;vertical-align: top; mso-line-height-rule: exactly; line-height: 20px; border-left: 1px solid #f0f0f0; background: #fff; border-radius: 0 16px 0 0;" valign="top">
                         <span>
                             <span style="font-size: 18px; font-weight: bold; letter-spacing: 0.5px; color: ${accentColor}; display: inline-block;">${name.toUpperCase()}</span><br>
                         </span>
