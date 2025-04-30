@@ -1,31 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Password Protection
-    const passwordOverlay = document.getElementById('password-overlay');
-    const passwordInput = document.getElementById('password-input');
-    const passwordSubmit = document.getElementById('password-submit');
-    const passwordError = document.getElementById('password-error');
-    const esgContainer = document.querySelector('.esg-container');
-
-    // The correct password (you can change this)
-    const correctPassword = 'heroic2024';
-
-    function checkPassword() {
-        if (passwordInput.value === correctPassword) {
-            passwordOverlay.style.display = 'none';
-            esgContainer.style.display = 'block';
-        } else {
-            passwordError.style.display = 'block';
-            passwordInput.value = '';
-        }
-    }
-
-    passwordSubmit.addEventListener('click', checkPassword);
-    passwordInput.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') {
-            checkPassword();
-        }
-    });
-
     const inputs = document.querySelectorAll('input');
     const preview = document.getElementById('signature-preview');
     const viewHtmlButton = document.getElementById('view-html-button');
@@ -197,8 +170,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Custom button options
         const showButton = document.getElementById('show-button').checked;
-        const buttonText = document.getElementById('button-text').value || 'Visit HEROIC.com';
-        const buttonLink = document.getElementById('button-link').value || 'https://heroic.com';
+        const buttonText = document.getElementById('button-text').value;
+        const buttonLink = document.getElementById('button-link').value;
 
         // Get image URLs
         const profilePictureUrl = profilePictureUrlInput.value.trim() || 'https://heroic.com/wp-content/uploads/placeholder-person.jpg';
@@ -285,7 +258,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     </td>
                 </tr>
                 <tr>
-                    <td colspan="3" width="600" style="width: 600px; font-size: 9px; padding: 10px 10px 10px 10px; text-align: left; background: #fafbfc; border-radius: 0 0 16px 16px; border-top: 1px solid #f0f0f0;">
+                    <td colspan="3" width="600" style="width: 600px; font-size: 9px; padding: 10px 10px 5px 10px; text-align: left; background: #fafbfc; border-radius: 0 0 16px 16px; border-top: 1px solid #f0f0f0;">
                         <table cellpadding="0" cellspacing="0" border="0" style="border-collapse: collapse; mso-table-lspace: 0; mso-table-rspace: 0;">
                             <tr>
                                 ${companyLogoUrls.map(url => url ? `<td style='padding-right: 16px; vertical-align: middle;'><img src="${url}" alt="Company Logo" height="38" style="vertical-align: middle; display: block; border: 0;" width="auto" onerror="this.style.display='none'"></td>` : '').join('')}
