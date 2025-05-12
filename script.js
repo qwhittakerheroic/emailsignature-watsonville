@@ -75,10 +75,10 @@ document.addEventListener('DOMContentLoaded', () => {
         
         // Add options
         const options = [
-            { value: 'images/WCH_Logo_Horizontal_Color-1.png', text: 'Watsonville Community Hospital' },
-            { value: 'images/Pajaro_Valley_Healthcare_Disctrict_Horizontal_Color.png', text: 'Pajaro Valley Healthcare District' },
-            { value: 'images/Coastal_Healthcare_Color (1).png', text: 'Coastal Healthcare' },
-            { value: 'images/Pajaro_Valley_Healthcare_Disctrict_Color.png', text: 'Pajaro Valley Healthcare District (Vertical)' }
+            { value: './images/WCH_Logo_Horizontal_Color-1.png', text: 'Watsonville Community Hospital' },
+            { value: './images/Pajaro_Valley_Healthcare_Disctrict_Horizontal_Color.png', text: 'Pajaro Valley Healthcare District' },
+            { value: './images/Coastal_Healthcare_Color (1).png', text: 'Coastal Healthcare' },
+            { value: './images/Pajaro_Valley_Healthcare_Disctrict_Color.png', text: 'Pajaro Valley Healthcare District (Vertical)' }
         ];
         
         options.forEach(opt => {
