@@ -46,9 +46,11 @@ document.addEventListener('DOMContentLoaded', () => {
     // Profile picture upload handler
     const profilePictureUpload = document.getElementById('profile-picture-upload');
     const profilePicturePreview = document.getElementById('profile-picture-preview');
-    profilePictureUpload.addEventListener('change', (e) => {
-        handleFileUpload(e.target.files[0], profilePicturePreview, profilePictureUrlInput);
-    });
+    if (profilePictureUpload && profilePicturePreview) {
+        profilePictureUpload.addEventListener('change', (e) => {
+            handleFileUpload(e.target.files[0], profilePicturePreview, profilePictureUrlInput);
+        });
+    }
 
     // Auto-convert Google Drive share link to direct image link for profile picture
     profilePictureUrlInput.addEventListener('input', function (e) {
