@@ -237,9 +237,18 @@ input:focus {
 
 .logo-url-row {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     gap: 8px;
     margin-bottom: 6px;
+}
+
+.logo-url-row .esg-image-upload {
+    flex: 1;
+    margin-bottom: 0;
+}
+
+.logo-url-row .company-logo-url {
+    flex: 2;
 }
 
 .add-logo-btn, .add-website-btn {
@@ -393,4 +402,42 @@ input:focus {
 .esg-color-input input[type="color"]::-webkit-color-swatch {
     border: none;
     border-radius: 3px;
+}
+
+.esg-image-upload {
+    margin-bottom: 10px;
+}
+
+.esg-file-input {
+    width: 100%;
+    padding: 8px;
+    border: 1px dashed #ddd;
+    border-radius: 5px;
+    background: #f8f9fa;
+    cursor: pointer;
+    margin-bottom: 8px;
+}
+
+.esg-file-input:hover {
+    border-color: #3498db;
+    background: #f0f7ff;
+}
+
+.esg-image-preview {
+    width: 100%;
+    min-height: 100px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+    margin-bottom: 8px;
+}
+
+.esg-image-preview img {
+    max-width: 100%;
+    max-height: 150px;
+    object-fit: contain;
 } 

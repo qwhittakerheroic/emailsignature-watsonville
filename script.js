@@ -11,6 +11,32 @@ document.addEventListener('DOMContentLoaded', () => {
     let logoFieldCount = 1;
     let websiteFieldCount = 1;
 
+    // Handle file uploads
+    function handleFileUpload(file, previewElement, urlInput) {
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                // Create and show preview
+                const img = document.createElement('img');
+                img.src = e.target.result;
+                previewElement.innerHTML = '';
+                previewElement.appendChild(img);
+                
+                // Update URL input with data URL
+                urlInput.value = e.target.result;
+                updatePreview();
+            };
+            reader.readAsDataURL(file);
+        }
+    }
+
+    // Profile picture upload handler
+    const profilePictureUpload = document.getElementById('profile-picture-upload');
+    const profilePicturePreview = document.getElementById('profile-picture-preview');
+    profilePictureUpload.addEventListener('change', (e) => {
+        handleFileUpload(e.target.files[0], profilePicturePreview, profilePictureUrlInput);
+    });
+
     // Auto-convert Google Drive share link to direct image link for profile picture
     profilePictureUrlInput.addEventListener('input', function (e) {
         const val = profilePictureUrlInput.value.trim();
@@ -28,6 +54,23 @@ document.addEventListener('DOMContentLoaded', () => {
     function addLogoField(value = '') {
         const row = document.createElement('div');
         row.className = 'logo-url-row';
+        
+        // Add image upload
+        const imageUpload = document.createElement('div');
+        imageUpload.className = 'esg-image-upload';
+        const fileInput = document.createElement('input');
+        fileInput.type = 'file';
+        fileInput.accept = 'image/*';
+        fileInput.className = 'esg-file-input';
+        fileInput.id = `company-logo-upload-${logoFieldCount}`;
+        const previewDiv = document.createElement('div');
+        previewDiv.className = 'esg-image-preview';
+        previewDiv.id = `company-logo-preview-${logoFieldCount}`;
+        imageUpload.appendChild(fileInput);
+        imageUpload.appendChild(previewDiv);
+        row.appendChild(imageUpload);
+
+        // Add URL input
         const input = document.createElement('input');
         input.type = 'url';
         input.className = 'company-logo-url';
@@ -35,6 +78,7 @@ document.addEventListener('DOMContentLoaded', () => {
         input.value = value;
         input.id = `company-logo-url-${logoFieldCount}`;
         row.appendChild(input);
+
         // Remove button
         const removeBtn = document.createElement('button');
         removeBtn.type = 'button';
@@ -46,13 +90,28 @@ document.addEventListener('DOMContentLoaded', () => {
             updatePreview();
         };
         row.appendChild(removeBtn);
+
         // Insert before the description
         const desc = companyLogoGroup.querySelector('.input-desc');
         companyLogoGroup.insertBefore(row, desc);
+
         // Listen for input
         input.addEventListener('input', updatePreview);
+        
+        // Listen for file upload
+        fileInput.addEventListener('change', (e) => {
+            handleFileUpload(e.target.files[0], previewDiv, input);
+        });
+
         logoFieldCount++;
     }
+
+    // Handle initial company logo upload
+    const initialLogoUpload = document.getElementById('company-logo-upload-0');
+    const initialLogoPreview = document.getElementById('company-logo-preview-0');
+    initialLogoUpload.addEventListener('change', (e) => {
+        handleFileUpload(e.target.files[0], initialLogoPreview, document.getElementById('company-logo-url-0'));
+    });
 
     // Add logo button logic
     const addLogoBtn = document.getElementById('add-logo-btn');

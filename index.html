@@ -53,22 +53,30 @@
                 </div>
 
                 <div class="esg-form-group">
-                    <label for="profile-picture-url"><i class="fas fa-camera"></i> Profile Picture URL</label>
+                    <label for="profile-picture-url"><i class="fas fa-camera"></i> Profile Picture</label>
                     <div class="esg-checkbox-group">
                         <input type="checkbox" id="show-profile-image">
                         <label for="show-profile-image">Show Profile Image</label>
                     </div>
+                    <div class="esg-image-upload">
+                        <input type="file" id="profile-picture-upload" accept="image/*" class="esg-file-input">
+                        <div class="esg-image-preview" id="profile-picture-preview"></div>
+                    </div>
                     <input type="url" id="profile-picture-url" placeholder="https://example.com/profile.jpg" value="https://heroic.com/wp-content/uploads/placeholder-person.jpg">
-                    <small class="esg-input-desc">Paste a direct link to your profile image (JPG, PNG, etc.). The image must be publicly accessible. You can upload your image to a dropbox folder and use the shared link here.</small>
+                    <small class="esg-input-desc">Upload an image or paste a direct link to your profile image (JPG, PNG, etc.). The image must be publicly accessible if using a URL.</small>
                 </div>
 
                 <div class="esg-form-group" id="esg-company-logo-group">
-                    <label for="company-logo-url-0"><i class="fas fa-image"></i> Company Logo URL</label>
+                    <label for="company-logo-url-0"><i class="fas fa-image"></i> Company Logo</label>
                     <div class="logo-url-row">
+                        <div class="esg-image-upload">
+                            <input type="file" id="company-logo-upload-0" accept="image/*" class="esg-file-input">
+                            <div class="esg-image-preview" id="company-logo-preview-0"></div>
+                        </div>
                         <input type="url" id="company-logo-url-0" class="company-logo-url" placeholder="https://example.com/logo.png" value="https://watsonvillehospital.com/wp-content/uploads/2025/04/WCH_Logo_Horizontal_Color-1.png">
                         <button type="button" id="add-logo-btn" class="add-logo-btn" title="Add another logo">+</button>
                     </div>
-                    <small class="esg-input-desc">Paste a direct link to your company logo. Click + to add more logos. Logos must be publicly accessible.</small>
+                    <small class="esg-input-desc">Upload a logo or paste a direct link to your company logo. Click + to add more logos. Logos must be publicly accessible if using URLs.</small>
                 </div>
 
                 <div class="esg-form-group esg-social-toggle-group">
