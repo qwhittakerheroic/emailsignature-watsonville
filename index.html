@@ -52,7 +52,7 @@
                     <small class="esg-input-desc">Add up to 3 websites. Click + to add more websites.</small>
                 </div>
 
-                <div class="esg-form-group">
+                <div class="esg-form-group independant-group">
                     <label for="profile-picture-url"><i class="fas fa-camera"></i> Profile Picture</label>
                     <div class="esg-checkbox-group">
                         <input type="checkbox" id="show-profile-image">
@@ -62,24 +62,34 @@
                         <input type="file" id="profile-picture-upload" accept="image/*" class="esg-file-input">
                         <div class="esg-image-preview" id="profile-picture-preview"></div>
                     </div>
-                    <input type="url" id="profile-picture-url" placeholder="https://example.com/profile.jpg" value="https://heroic.com/wp-content/uploads/placeholder-person.jpg">
-                    <small class="esg-input-desc">Upload an image or paste a direct link to your profile image (JPG, PNG, etc.). The image must be publicly accessible if using a URL.</small>
+                    <input type="hidden" id="profile-picture-url" value="https://heroic.com/wp-content/uploads/placeholder-person.jpg">
+                    <small class="esg-input-desc">Upload your profile picture (JPG, PNG, etc.). For best results, use a square image.</small>
                 </div>
 
-                <div class="esg-form-group" id="esg-company-logo-group">
-                    <label for="company-logo-url-0"><i class="fas fa-image"></i> Company Logo</label>
-                    <div class="logo-url-row">
-                        <div class="esg-image-upload">
-                            <input type="file" id="company-logo-upload-0" accept="image/*" class="esg-file-input">
-                            <div class="esg-image-preview" id="company-logo-preview-0"></div>
-                        </div>
-                        <input type="url" id="company-logo-url-0" class="company-logo-url" placeholder="https://example.com/logo.png" value="https://watsonvillehospital.com/wp-content/uploads/2025/04/WCH_Logo_Horizontal_Color-1.png">
+                <div class="esg-form-group independant-group">
+                    <label><i class="fas fa-icons"></i> Icon Visibility</label>
+                    <div class="esg-checkbox-group">
+                        <input type="checkbox" id="show-icons">
+                        <label for="show-icons">Show Icons</label>
+                    </div>
+                    <small class="esg-input-desc">Toggle visibility of icons for contact information.</small>
+                </div>
+
+                <div class="esg-form-group independant-group" id="esg-company-logo-group">
+                    <label for="company-logo-select"><i class="fas fa-image"></i> Company Logo</label>
+                    <div class="logo-selection">
+                        <select id="company-logo-select" class="company-logo-select">
+                            <option value="images/WCH_Logo_Horizontal_Color-1.png">Watsonville Community Hospital</option>
+                            <option value="images/Pajaro_Valley_Healthcare_Disctrict_Horizontal_Color.png">Pajaro Valley Healthcare District</option>
+                            <option value="images/Coastal_Healthcare_Color (1).png">Coastal Healthcare</option>
+                            <option value="images/Pajaro_Valley_Healthcare_Disctrict_Color.png">Pajaro Valley Healthcare District (Vertical)</option>
+                        </select>
                         <button type="button" id="add-logo-btn" class="add-logo-btn" title="Add another logo">+</button>
                     </div>
-                    <small class="esg-input-desc">Upload a logo or paste a direct link to your company logo. Click + to add more logos. Logos must be publicly accessible if using URLs.</small>
+                    <small class="esg-input-desc">Select your company logo. Click + to add more logos.</small>
                 </div>
 
-                <div class="esg-form-group esg-social-toggle-group">
+                <div class="esg-form-group esg-social-toggle-group ">
                     <div class="esg-social-toggle-header" id="esg-social-toggle-header" tabindex="0">
                         <i class="fas fa-share-alt"></i> Social Media Links
                         <span id="social-toggle-icon" class="social-toggle-icon">▼</span>
@@ -100,7 +110,7 @@
                     </div>
                 </div>
 
-                <div class="esg-form-group">
+                <div class="esg-form-group independant-group">
                     <label><i class="fas fa-link"></i> Custom Button</label>
                     <div class="esg-button-options">
                         <div class="esg-checkbox-group">
@@ -114,7 +124,7 @@
                     </div>
                 </div>
 
-                <div class="esg-form-group">
+                <div class="esg-form-group independant-group">
                     <label><i class="fas fa-palette"></i> Signature Colors</label>
                     <div class="esg-color-options">
                         <div class="esg-color-input">
@@ -143,11 +153,11 @@
                 <div id="esg-preview-instructions" style="margin-top: 1.5rem; color: #555; font-size: 0.97em; background: #f8f9fa; border-radius: 5px; padding: 1rem; border: 1px solid #eee;">
                     <strong>Instructions:</strong><br>
                     1. Fill out your information and see your signature update live above.<br>
-                    2. Click <b>Copy Signature</b> to copy your signature.<br>
-                    3. Go to your email settings and paste the signature into your signature field.<br>
-                    4. For best results, use square images for your profile picture.<br>
-                    5. If using Google Drive for images, paste the share link and it will auto-convert.<br>
-                    6. If you have issues with images, ensure the link is public and direct.<br>
+                    2. Upload your profile picture or use the default placeholder.<br>
+                    3. Select your company logo from the dropdown menu.<br>
+                    4. Toggle icon visibility if you prefer a cleaner look.<br>
+                    5. Click <b>Copy Signature</b> to copy your signature.<br>
+                    6. Go to your email settings and paste the signature into your signature field.<br>
                 </div>
             </div>
         </div>

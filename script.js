@@ -11,6 +11,17 @@ document.addEventListener('DOMContentLoaded', () => {
     let logoFieldCount = 1;
     let websiteFieldCount = 1;
 
+    // Create initial hidden input for company logo
+    const initialLogoUrl = document.createElement('input');
+    initialLogoUrl.type = 'hidden';
+    initialLogoUrl.className = 'company-logo-url';
+    initialLogoUrl.id = 'company-logo-url-0';
+    companyLogoGroup.insertBefore(initialLogoUrl, companyLogoGroup.querySelector('.input-desc'));
+
+    // Set initial company logo URL
+    const initialLogoSelect = document.getElementById('company-logo-select');
+    initialLogoUrl.value = initialLogoSelect.value;
+
     // Handle file uploads
     function handleFileUpload(file, previewElement, urlInput) {
         if (file) {
@@ -24,7 +35,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 
                 // Update URL input with data URL
                 urlInput.value = e.target.result;
-                updatePreview();
+                
+                // Force preview update
+                setTimeout(updatePreview, 0);
             };
             reader.readAsDataURL(file);
         }
@@ -53,29 +66,35 @@ document.addEventListener('DOMContentLoaded', () => {
     // Add logo field logic
     function addLogoField(value = '') {
         const row = document.createElement('div');
-        row.className = 'logo-url-row';
+        row.className = 'logo-selection';
         
-        // Add image upload
-        const imageUpload = document.createElement('div');
-        imageUpload.className = 'esg-image-upload';
-        const fileInput = document.createElement('input');
-        fileInput.type = 'file';
-        fileInput.accept = 'image/*';
-        fileInput.className = 'esg-file-input';
-        fileInput.id = `company-logo-upload-${logoFieldCount}`;
-        const previewDiv = document.createElement('div');
-        previewDiv.className = 'esg-image-preview';
-        previewDiv.id = `company-logo-preview-${logoFieldCount}`;
-        imageUpload.appendChild(fileInput);
-        imageUpload.appendChild(previewDiv);
-        row.appendChild(imageUpload);
+        // Add logo select
+        const select = document.createElement('select');
+        select.className = 'company-logo-select';
+        select.id = `company-logo-select-${logoFieldCount}`;
+        
+        // Add options
+        const options = [
+            { value: 'images/WCH_Logo_Horizontal_Color-1.png', text: 'Watsonville Community Hospital' },
+            { value: 'images/Pajaro_Valley_Healthcare_Disctrict_Horizontal_Color.png', text: 'Pajaro Valley Healthcare District' },
+            { value: 'images/Coastal_Healthcare_Color (1).png', text: 'Coastal Healthcare' },
+            { value: 'images/Pajaro_Valley_Healthcare_Disctrict_Color.png', text: 'Pajaro Valley Healthcare District (Vertical)' }
+        ];
+        
+        options.forEach(opt => {
+            const option = document.createElement('option');
+            option.value = opt.value;
+            option.textContent = opt.text;
+            select.appendChild(option);
+        });
+        
+        row.appendChild(select);
 
-        // Add URL input
+        // Add hidden URL input
         const input = document.createElement('input');
-        input.type = 'url';
+        input.type = 'hidden';
         input.className = 'company-logo-url';
-        input.placeholder = 'https://example.com/logo.png';
-        input.value = value;
+        input.value = value || options[0].value;
         input.id = `company-logo-url-${logoFieldCount}`;
         row.appendChild(input);
 
@@ -95,22 +114,19 @@ document.addEventListener('DOMContentLoaded', () => {
         const desc = companyLogoGroup.querySelector('.input-desc');
         companyLogoGroup.insertBefore(row, desc);
 
-        // Listen for input
-        input.addEventListener('input', updatePreview);
-        
-        // Listen for file upload
-        fileInput.addEventListener('change', (e) => {
-            handleFileUpload(e.target.files[0], previewDiv, input);
+        // Listen for select change
+        select.addEventListener('change', (e) => {
+            input.value = e.target.value;
+            updatePreview();
         });
 
         logoFieldCount++;
     }
 
-    // Handle initial company logo upload
-    const initialLogoUpload = document.getElementById('company-logo-upload-0');
-    const initialLogoPreview = document.getElementById('company-logo-preview-0');
-    initialLogoUpload.addEventListener('change', (e) => {
-        handleFileUpload(e.target.files[0], initialLogoPreview, document.getElementById('company-logo-url-0'));
+    // Handle initial company logo select
+    initialLogoSelect.addEventListener('change', (e) => {
+        initialLogoUrl.value = e.target.value;
+        updatePreview();
     });
 
     // Add logo button logic
@@ -118,54 +134,6 @@ document.addEventListener('DOMContentLoaded', () => {
     addLogoBtn.onclick = () => {
         addLogoField();
     };
-
-    // Listen for input on the initial logo field
-    const initialLogoInput = document.getElementById('company-logo-url-0');
-    initialLogoInput.addEventListener('input', updatePreview);
-
-    // Add website field logic
-    function addWebsiteField(value = '') {
-        if (websiteFieldCount >= 3) {
-            alert('Maximum of 3 websites allowed');
-            return;
-        }
-        const row = document.createElement('div');
-        row.className = 'website-url-row';
-        const input = document.createElement('input');
-        input.type = 'url';
-        input.className = 'website-url';
-        input.placeholder = 'https://example.com';
-        input.value = value;
-        input.id = `website-${websiteFieldCount}`;
-        row.appendChild(input);
-        // Remove button
-        const removeBtn = document.createElement('button');
-        removeBtn.type = 'button';
-        removeBtn.className = 'remove-website-btn';
-        removeBtn.title = 'Remove this website';
-        removeBtn.textContent = '–';
-        removeBtn.onclick = () => {
-            row.remove();
-            updatePreview();
-        };
-        row.appendChild(removeBtn);
-        // Insert before the description
-        const desc = websiteGroup.querySelector('.input-desc');
-        websiteGroup.insertBefore(row, desc);
-        // Listen for input
-        input.addEventListener('input', updatePreview);
-        websiteFieldCount++;
-    }
-
-    // Add website button logic
-    const addWebsiteBtn = document.getElementById('add-website-btn');
-    addWebsiteBtn.onclick = () => {
-        addWebsiteField();
-    };
-
-    // Listen for input on the initial website field
-    const initialWebsiteInput = document.getElementById('website-0');
-    initialWebsiteInput.addEventListener('input', updatePreview);
 
     // Social media toggle logic
     const socialToggleHeader = document.getElementById('esg-social-toggle-header');
@@ -192,8 +160,8 @@ document.addEventListener('DOMContentLoaded', () => {
             setSocialExpanded(!socialExpanded);
         }
     });
-    // Start collapsed
-    setSocialExpanded(false);
+    // Start expanded
+    setSocialExpanded(true);
 
     // Function to update the preview
     function updatePreview() {
@@ -203,6 +171,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const email = document.getElementById('email').value || 'john@example.com';
         const phone = document.getElementById('phone').value || '+1 (555) 123-4567';
         const fax = document.getElementById('fax').value;
+        const showIcons = document.getElementById('show-icons').checked;
         
         // Get custom colors
         const accentColor = document.getElementById('accent-color').value;
@@ -238,6 +207,12 @@ document.addEventListener('DOMContentLoaded', () => {
         // Gather all company logo URLs
         const logoInputs = companyLogoGroup.querySelectorAll('.company-logo-url');
         const companyLogoUrls = Array.from(logoInputs).map(input => input.value.trim()).filter(Boolean);
+
+        // Icon HTML
+        const phoneIcon = showIcons ? `<img style="width: 16px; margin-right: 4px; vertical-align: middle;" src="https://cdn-icons-png.flaticon.com/512/126/126341.png">` : '';
+        const emailIcon = showIcons ? `<img style="width: 16px; margin-right: 4px; vertical-align: middle;" src="https://cdn-icons-png.flaticon.com/512/561/561127.png">` : '';
+        const faxIcon = showIcons ? `<img style="width: 16px; margin-right: 4px; vertical-align: middle;" src="https://cdn-icons-png.flaticon.com/512/724/724664.png">` : '';
+        const websiteIcon = showIcons ? `<img style="width: 16px; margin-right: 4px; vertical-align: middle;" src="https://cdn-icons-png.flaticon.com/512/535/535239.png">` : '';
 
         // Use modern, slightly larger, compact styles with unique accent
         const emailSafeHTML = `
@@ -275,22 +250,19 @@ document.addEventListener('DOMContentLoaded', () => {
                         </span>
                         <div style="background: linear-gradient(90deg, ${accentColor} 0%, #f0f0f0 100%); height: 2px; width: 60%; margin: 8px 0px 8px 0px; border-radius: 2px;"></div>
                         <span style="padding-top: 10px;">
-                            <img style="width: 16px; margin-right: 4px; vertical-align: middle;" src="https://cdn-icons-png.flaticon.com/512/126/126341.png"><span style="font-weight: 500;">${phone}</span>
+                            ${phoneIcon}<span style="font-weight: 500;">${phone}</span>
                         </span><br>
                         <span>
-                            <img style="width: 16px; margin-right: 4px; vertical-align: middle;" src="https://cdn-icons-png.flaticon.com/512/561/561127.png">
-                            <a style="text-decoration: underline; color: #434343; font-size: 13px;" href="mailto:${email}"><span>${email}</span></a>
+                            ${emailIcon}<a style="text-decoration: underline; color: #434343; font-size: 13px;" href="mailto:${email}"><span>${email}</span></a>
                         </span><br>
                         ${fax ? `
                         <span>
-                            <img style="width: 16px; margin-right: 4px; vertical-align: middle;" src="https://cdn-icons-png.flaticon.com/512/724/724664.png">
-                            <span>${fax}</span>
+                            ${faxIcon}<span>${fax}</span>
                         </span><br>
                         ` : ''}
                         ${websites.length > 0 ? `
                         <span>
-                            <img style="width: 16px; margin-right: 4px; vertical-align: middle;" src="https://cdn-icons-png.flaticon.com/512/535/535239.png">
-                            <span style="font-size: 13px;">
+                            ${websiteIcon}<span style="font-size: 13px;">
                                 ${websites.map((website, index) => `
                                     <a style="text-decoration: underline; color: #434343;" href="${website}">${website}</a>
                                     ${index < websites.length - 1 ? ' | ' : ''}

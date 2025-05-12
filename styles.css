@@ -34,7 +34,8 @@ h1 {
 }
 
 .esg-form-group {
-    margin-bottom: 1.5rem;
+    background-color: #f7f8f9;
+    padding: 10px;
 }
 
 label {
@@ -440,4 +441,38 @@ input:focus {
     max-width: 100%;
     max-height: 150px;
     object-fit: contain;
+}
+
+.logo-selection {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 6px;
+}
+
+.company-logo-select {
+    flex: 1;
+    padding: 0.8rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    background-color: white;
+    cursor: pointer;
+    transition: border-color 0.3s ease;
+}
+
+.company-logo-select:focus {
+    outline: none;
+    border-color: #3498db;
+}
+
+.company-logo-select:hover {
+    border-color: #3498db;
 } 
+
+.independant-group {
+    background-color: #f7f8f9;
+    padding: 20px;
+    border-radius: 5px;
+    margin-top: 1.5em;
+}
